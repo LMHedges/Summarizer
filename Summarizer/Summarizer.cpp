@@ -19,6 +19,9 @@ string text;
 string wordHolder;
 string wordcounter;
 string spaces;
+string wordNum;
+int counter = 0;
+bool valid = true;
 int pointer = 0;
 int spaceNum;
 int numberOfWords = 0;
@@ -34,35 +37,48 @@ int main()
             if (text[i] == '.' || text[i] == '!' || text[i] == '?') {
                 numberOfSentences++;
                 numberOfWords++;
-                for (pointer; pointer <= i; pointer++) {
+                for (pointer; pointer < i; pointer++) {
                     wordHolder = wordHolder + text[pointer];
                 }
-                cout << wordHolder << endl;
                 pointer = i + 1;
-                wordHolder.clear();
                 for (auto savedWord : wordlist) {
                     if (savedWord.word == wordHolder) {
                         savedWord.count++;
+                        wordlist[counter].count++;
+                        valid = false;
                     }
+                    counter++;
                 }
-                
-                //WordFreqPair obj(wordHolder);
-                //wordlist.push_back(obj);
+                if (valid == true) {
+                    wordNum = to_string(numberOfWords);
+                    WordFreqPair wordNum(wordHolder);
+                    wordlist.push_back(wordNum);
+                }
+                valid = true;
+                wordHolder.clear();
+                counter = 0;
             }
             else if(text[i] == ' ' || text[i] == ',') {
                 numberOfWords++;
-                for (pointer; pointer <= i; pointer++) {
+                for (pointer; pointer < i; pointer++) {
                     wordHolder = wordHolder + text[pointer];
                 }
-                cout << wordHolder << endl;
                 pointer = i + 1;
-                wordHolder.clear();
                 for (auto savedWord : wordlist) {
                     if (savedWord.word == wordHolder) {
-                        savedWord.count++;
+                        wordlist[counter].count++;
+                        valid = false;
                     }
+                    counter++;
                 }
-
+                if (valid == true) {
+                    wordNum = to_string(numberOfWords);
+                    WordFreqPair wordNum(wordHolder);
+                    wordlist.push_back(wordNum);
+                }
+                valid = true;
+                wordHolder.clear();
+                counter = 0;
             }
 
         }
@@ -76,6 +92,7 @@ int main()
             spaces = spaces + ' ';
         }
         cout << savedWord.word << spaces << savedWord.count << endl;
+        spaces.clear();
     }
     fileReader.close();
 }
