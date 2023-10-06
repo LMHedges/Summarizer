@@ -49,6 +49,9 @@ int main()
                     }
                     counter++;
                 }
+                //if (wordHolder == "") {
+                //    valid = false;
+                //}
                 if (valid == true) {
                     wordNum = to_string(numberOfWords);
                     WordFreqPair wordNum(wordHolder);
@@ -71,6 +74,9 @@ int main()
                     }
                     counter++;
                 }
+                //if (wordHolder == "") {
+                //    valid = false;
+                //}
                 if (valid == true) {
                     wordNum = to_string(numberOfWords);
                     WordFreqPair wordNum(wordHolder);
@@ -80,10 +86,9 @@ int main()
                 wordHolder.clear();
                 counter = 0;
             }
-
         }
+        pointer = 0;
     }
-
     cout << "number of sentences is " << numberOfSentences << endl;
     cout << "number of words is " << numberOfWords << endl;
     for (auto savedWord : wordlist) {
